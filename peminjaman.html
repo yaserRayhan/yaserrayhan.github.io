@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
+    <title>Rental Mobil</title>
+  </head>
+  <body>
+    
+    <div class="row justify-content-md-center">
+      <div class="col-md-4">
+          <div class="container mt-2">
+            <center>
+              <h1>Rental Mobil</h1>
+              <hr />
+            </center>
+          </div>
+
+          <div class="content pt-3">
+            <center><h3>Data Peminjaman</h3></center>
+            <div id="alertBerhasil"></div>
+            <button
+              class="btn btn-primary mt-1"
+              data-toggle="modal"
+              data-target="#modalTambahData"
+            >
+              Tambah Data Baru
+            </button>
+
+            <div id="content-peminjaman" class="mt-3"></div>
+          </div>
+
+          <div class="botom-nav  pt-5">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
+              <div class="container">
+                <a class="navbar-brand" href="index.html">
+                  <img src="images/icon/house.svg" width="30" height="30" alt="" />
+                </a>
+                <a class="navbar-brand" href="peminjaman.html">
+                  <img src="images/icon/table.svg" width="30" height="30" alt="" />
+                </a>
+                <a class="navbar-brand" href="mobil.html">
+                  <img
+                    src="images/icon/car-front-fill.svg"
+                    width="30"
+                    height="30"
+                    alt=""
+                  />
+                </a>
+              </div>
+            </nav>
+          </div>
+
+          <!-- Modal Tambah -->
+          <div
+            class="modal fade"
+            id="modalTambahData"
+            tabindex="-1"
+            aria-labelledby="labelModalTambahData"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="labelModalTambahData">Tambah Data</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="namaTambah">Nama</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="namaTambah"
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="alamatTambah">Alamat</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="alamatTambah"
+                        aria-describedby="emailHelp"
+                      />
+
+                      <div class="form-group">
+                        <label for="nikTambah">NIK</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nikTambah"
+                          aria-describedby="emailHelp"
+                        />
+
+                        <div class="form-group">
+                          <label for="telpTambah">No. Telp</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="telpTambah"
+                            aria-describedby="emailHelp"
+                          />
+
+                          <div class="form-group">
+                            <label for="inputMobil">Pilih Mobil</label>
+                            <select id="inputMobil" class="form-control">
+                              <option selected>Choose...</option>
+                              <option>...</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="totalTambah">Total Pinjam (hari)</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="totalTambah"
+                              aria-describedby="emailHelp"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Tutup
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="tambahData()"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal edit -->
+          <div
+            class="modal fade"
+            id="modalEditData"
+            tabindex="-1"
+            aria-labelledby="labelModalEditData"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="labelModalEditData">Edit Data</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <input type="hidden" id="idEdit" />
+                      <label for="namaEdit">Nama</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="namaEdit"
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="alamatEdit">Alamat</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="alamatEdit"
+                        aria-describedby="emailHelp"
+                      />
+
+                      <div class="form-group">
+                        <label for="nikEdit">NIK</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nikEdit"
+                          aria-describedby="emailHelp"
+                        />
+
+                        <div class="form-group">
+                          <label for="telpEdit">No. Telp</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="telpEdit"
+                            aria-describedby="emailHelp"
+                          />
+
+                          <div class="form-group">
+                            <label for="inputMobilEdit">Pilih Mobil</label>
+                            <select id="inputMobilEdit" class="form-control"></select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="totalEdit">Total Pinjam (hari)</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="totalEdit"
+                              aria-describedby="emailHelp"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="totalEdit">Status Pinjam</label>
+                            <select id="inputStatusEdit" class="form-control">
+                              <option value="Selesai">Selesai</option>
+                              <option value="Belum Selesai">Belum Selesai</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Tutup
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                    onclick="editData()"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- modal detail -->
+          <div
+            class="modal fade"
+            id="modalDetailData"
+            tabindex="-1"
+            aria-labelledby="labelmodalDetailData"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="labelmodalDetailData">Detail</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id="cardBodyDetailPeminjaman"></div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onclick="hapusData()"
+                    data-dismiss="modal"
+                  >
+                    Hapus
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning"
+                    data-toggle="modal"
+                    data-target="#modalEditData"
+                    onclick="showEditData()"
+                    data-dismiss="modal"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Tutup
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row justify-content-md-center">
+      <div class="col-md-4">
+
+    <script src="assets/js/jquery-3.6.1.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+
+    <script>
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+
+      function dataMobil() {
+        let data = localStorage.getItem("dataMobil");
+        data = JSON.parse(data);
+
+        let mobil = document.getElementById("inputMobil");
+
+        if (data == null) {
+          mobil.innerHTML = `
+          <option selected>Pilih</option>
+          `;
+
+          return;
+        }
+
+        let option = `
+          <option selected>Pilih</option>
+        `;
+        for (let i = 0; i < data.data.length; i++) {
+          if (data.data[i].status != "Tersedia") {
+            continue;
+          }
+          option += `
+          <option value="${data.data[i].id}">${data.data[i].name}</option>
+          `;
+        }
+        document.getElementById("inputMobil").innerHTML = option;
+      }
+
+      function showData(reload = false) {
+        this.dataMobil();
+        let data = localStorage.getItem("dataPeminjaman");
+        data = JSON.parse(data);
+
+        let tabelPeminjaman = document.getElementById("content-peminjaman");
+
+        if (data == null || data.length == 0) {
+          tabelPeminjaman.innerHTML = `
+          <div class="alert alert-warning">
+            Data Kosong
+          </div>
+          `;
+          return;
+        }
+
+        if (reload == true || data != null) {
+          tabelPeminjaman.innerHTML = `
+          <table class="table table-striped" id="tabel-peminjaman"></table>
+          `;
+        }
+        let nomor = 1;
+        let tabel = `
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Mobil</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        `;
+
+        let dataMobil = localStorage.getItem("dataMobil");
+        dataMobil = JSON.parse(dataMobil);
+
+        for (let i = 0; i < data.length; i++) {
+          //find data mobil
+          
+          dataMobil = dataMobil.data.find((item) => item.id == data[i].mobil);
+
+          if(dataMobil == null){
+            dataMobil = {
+              name: "Mobil tidak ditemukan",
+              status: "Tidak Tersedia"
+            }
+          }
+
+          if(data[i].status == "Selesai"){
+            dataMobil = {
+              name : data[i].mobil,
+            }
+          }
+          tabel += `
+          <tr>
+            <td>${nomor}</td>
+            <td>${data[i].nama}</td>
+            <td>${dataMobil.name}</td>
+            <td class="${data[i].status == "Selesai" ? "text-success" : "text-danger"}"
+            >${data[i].status}</td>
+            <td>
+              <button class="btn btn-primary" onclick="detailData(${i})" data-toggle="modal" data-target="#modalDetailData">Detail</button>
+            </td>
+          </tr>
+          `;
+          nomor++;
+        }
+
+        document.getElementById("tabel-peminjaman").innerHTML = tabel;
+      }
+
+      function tambahData() {
+        let nama = document.getElementById("namaTambah").value;
+        let alamat = document.getElementById("alamatTambah").value;
+        let nik = document.getElementById("nikTambah").value;
+        let telp = document.getElementById("telpTambah").value;
+        let mobil = document.getElementById("inputMobil").value;
+        let total = document.getElementById("totalTambah").value;
+
+        let data = localStorage.getItem("dataPeminjaman");
+        data = JSON.parse(data);
+
+        if (data == null) {
+          data = [];
+        }
+
+        let dataMobil = localStorage.getItem("dataMobil");
+        dataMobil = JSON.parse(dataMobil);
+
+        if (dataMobil == null) {
+          dataMobil = [];
+        }
+
+        let mobilIndex = dataMobil.data.findIndex((item) => item.id == mobil);
+        dataMobil.data[mobilIndex].status = "Tidak Tersedia";
+
+        localStorage.setItem("dataMobil", JSON.stringify(dataMobil));
+
+        let dataBaru = {
+          nama: nama,
+          alamat: alamat,
+          nik: nik,
+          telp: telp,
+          mobil: mobil,
+          totalHari: total,
+          totalBayar: parseInt(dataMobil.data[mobilIndex].price) * total,
+          status: "Belum Selesai",
+        };
+
+        data.push(dataBaru);
+
+        localStorage.setItem("dataPeminjaman", JSON.stringify(data));
+
+        showData(true);
+
+        $("#modalTambahData").modal("hide");
+
+        let alert = `
+        <div class="alert alert-success" role="alert">
+          Data berhasil ditambahkan
+        </div>
+        `;
+        document.getElementById("alertBerhasil").innerHTML = alert;
+
+        setTimeout(() => {
+          document.getElementById("alertBerhasil").innerHTML = "";
+        }, 3000);
+      }
+
+      function detailData(id) {
+        let data = localStorage.getItem("dataPeminjaman");
+        data = JSON.parse(data);
+        let mobilName="";
+
+        if(data[id].status != "Selesai"){
+          let dataMobil = localStorage.getItem("dataMobil");
+          dataMobil = JSON.parse(dataMobil);
+  
+          let mobilIndex = dataMobil.data.findIndex(
+            (item) => item.id == data[id].mobil
+          );
+          mobilName = dataMobil.data[mobilIndex].name;
+        }else{
+          mobilName = data[id].mobil;
+        }
+
+        let cardBody = `
+          <div class="card">
+            <div class="card-body">
+              <input type="hidden" id="idDetail" value="${id}">
+              <h5 class="card-title">Nama : ${data[id].nama}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Alamat : ${data[id].alamat}</h6>
+              <p class="card-text">NIK : ${data[id].nik}</p>
+              <p class="card-text">No. Telp : ${data[id].telp}</p>
+              <p class="card-text">Mobil : ${mobilName}</p>
+              <p class="card-text">Total Hari : ${data[id].totalHari}</p>
+              <p class="card-text">Total Bayar : Rp. ${numberWithCommas(
+                data[id].totalBayar
+              )}</p>
+              <p class="card-text">Status : ${data[id].status}</p>
+            </div>
+          </div>
+        `;
+
+        document.getElementById("cardBodyDetailPeminjaman").innerHTML =
+          cardBody;
+      }
+
+      function hapusData() {
+        let id = document.getElementById("idDetail").value;
+
+        let data = localStorage.getItem("dataPeminjaman");
+        data = JSON.parse(data);
+
+        if(data[id].status != "Selesai"){
+          let dataMobil = localStorage.getItem("dataMobil");
+          dataMobil = JSON.parse(dataMobil);
+  
+          let mobilIndex = dataMobil.data.findIndex(
+            (item) => item.id == data[id].mobil
+          );
+  
+          dataMobil.data[mobilIndex].status = "Tersedia";
+  
+          localStorage.setItem("dataMobil", JSON.stringify(dataMobil));
+        }
+
+        data.splice(id, 1);
+
+        localStorage.setItem("dataPeminjaman", JSON.stringify(data));
+
+        showData(true);
+        dataMobil();
+
+        $("#modalDetailData").modal("hide");
+
+        let alert = `
+        <div class="alert alert-success" role="alert">
+          Data berhasil dihapus
+        </div>
+        `;
+        document.getElementById("alertBerhasil").innerHTML = alert;
+
+        setTimeout(() => {
+          document.getElementById("alertBerhasil").innerHTML = "";
+        }, 3000);
+      }
+
+      function editData() {
+        let id = document.getElementById("idEdit").value;
+        let nama = document.getElementById("namaEdit").value;
+        let alamat = document.getElementById("alamatEdit").value;
+        let nik = document.getElementById("nikEdit").value;
+        let telp = document.getElementById("telpEdit").value;
+        let mobil = document.getElementById("inputMobilEdit").value;
+        let total = document.getElementById("totalEdit").value;
+        let status = document.getElementById("inputStatusEdit").value;
+
+        let data = localStorage.getItem("dataPeminjaman");
+        data = JSON.parse(data);
+
+        let dataMobil = localStorage.getItem("dataMobil");
+        dataMobil = JSON.parse(dataMobil);
+
+        let mobilIndex = dataMobil.data.findIndex((item) => item.id == mobil);
+       
+        if(data[id].status == "Selesai" && data[id].mobil != mobil && status == "Selesai"){
+          let alert = `
+          <div class="alert alert-danger" role="alert">
+            Mobil tidak dapat diubah karena status sudah selesai, ubah status menjadi belum selesai terlebih dahulu
+          </div>
+          `;
+          document.getElementById("alertBerhasil").innerHTML = alert;
+
+          setTimeout(() => {
+            document.getElementById("alertBerhasil").innerHTML = "";
+          }, 5000);
+          return;
+        }
+        
+        if (data[id].mobil != mobil && data[id].status != "Selesai") {
+          let mobilIndexLama = dataMobil.data.findIndex(
+            (item) => item.id == data[id].mobil
+          );
+          dataMobil.data[mobilIndexLama].status = "Tersedia";
+        }
+
+        if((data[id].status != "Selesai" && status == "Selesai") && data[id].mobil != mobil){
+          const idMobilLama = data[id].mobil;
+          console.log("index lama : "+idMobilLama);
+          const mobilIndexLama = dataMobil.data.findIndex(
+            (item) => item.id == idMobilLama
+          );
+          dataMobil.data[mobilIndexLama].status = "Tersedia";
+        }
+        if(status != "Selesai"){
+          dataMobil.data[mobilIndex].status = "Tidak Tersedia";
+        }else{
+          dataMobil.data[mobilIndex].status = "Tersedia";
+        }
+
+        localStorage.setItem("dataMobil", JSON.stringify(dataMobil));
+
+        let totalBayar;
+        if(status == "Selesai"){
+          totalBayar = data[id].totalBayar;
+          mobilIndex = dataMobil.data.findIndex(
+            (item) => item.id == data[id].mobil
+          );
+          console.log("Index baru : "+mobilIndex);
+          dataMobil.data[mobilIndex].status = "Tersedia";
+
+          localStorage.setItem("dataMobil", JSON.stringify(dataMobil));
+
+          mobil = dataMobil.data[mobilIndex].name;
+        }else{
+          totalBayar = parseInt(dataMobil.data[mobilIndex].price) * total;
+        }
+        let dataBaru = {
+          nama: nama,
+          alamat: alamat,
+          nik: nik,
+          telp: telp,
+          mobil: mobil,
+          totalHari: total,
+          totalBayar: totalBayar,
+          status: status,
+        };
+
+        data[id] = dataBaru;
+
+        localStorage.setItem("dataPeminjaman", JSON.stringify(data));
+
+        showData(true);
+
+        $("#modalEditData").modal("hide");
+
+        let alert = `
+        <div class="alert alert-success" role="alert">
+          Data berhasil diubah
+        </div>
+        `;
+
+        document.getElementById("alertBerhasil").innerHTML = alert;
+
+        setTimeout(() => {
+          document.getElementById("alertBerhasil").innerHTML = "";
+        }, 3000);
+        
+      }
+
+      function showEditData() {
+        let id = document.getElementById("idDetail").value;
+
+        let data = localStorage.getItem("dataPeminjaman");
+        data = JSON.parse(data);
+
+        let dataMobil = localStorage.getItem("dataMobil");
+        dataMobil = JSON.parse(dataMobil);
+
+        let mobilIndex = dataMobil.data.findIndex(
+          (item) => item.id == data[id].mobil
+        );
+
+        document.getElementById("idEdit").value = id;
+        document.getElementById("namaEdit").value = data[id].nama;
+        document.getElementById("alamatEdit").value = data[id].alamat;
+        document.getElementById("nikEdit").value = data[id].nik;
+        document.getElementById("telpEdit").value = data[id].telp;
+
+
+        let option = "";
+        for (let i = 0; i < dataMobil.data.length; i++) {
+          if (
+            dataMobil.data[i].status != "Tersedia" &&
+            dataMobil.data[i].id != data[id].mobil
+          ) {
+            continue;
+          }
+          option += `
+          <option value="${dataMobil.data[i].id}" ${
+            dataMobil.data[i].id == data[id].mobil ? "selected" : ""
+          }>${dataMobil.data[i].name}</option>
+          `;
+        }
+        document.getElementById("inputMobilEdit").innerHTML = option;
+        document.getElementById("totalEdit").value = data[id].totalHari;
+        document.getElementById("inputStatusEdit").value = data[id].status;
+      }
+      
+      showData();
+    </script>
+    <script src="register.js"></script>
+    <script src="service-worker.js"></script>
+  </body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <style>
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
+    <title>Rental Mobil</title>
+  </head>
+  <body>
+    <div class="row justify-content-md-center">
+      <div class="col-md-4">
+        <div class="container mt-2">
+          <center>
+            <h1>Rental Mobil</h1>
+            <hr />
+          </center>
+        </div>
+
+        <div class="content pt-2">
+          <div class="container-fluid">
+            <button
+              class="btn btn-primary mb-3"
+              data-toggle="modal"
+              data-target="#modalTambah"
+            >
+              Tambah Data
+            </button>
+
+            <div id="cardContent" class="mb-5"></div>
+          </div>
+        </div>
+
+        <div class="botom-nav pt-3">
+          <nav
+            class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom"
+          >
+            <div class="container">
+              <a class="navbar-brand" href="index.html">
+                <img
+                  src="images/icon/house.svg"
+                  width="30"
+                  height="30"
+                  alt=""
+                />
+              </a>
+              <a class="navbar-brand" href="peminjaman.html">
+                <img
+                  src="images/icon/table.svg"
+                  width="30"
+                  height="30"
+                  alt=""
+                />
+              </a>
+              <a class="navbar-brand" href="mobil.html">
+                <img
+                  src="images/icon/car-front-fill.svg"
+                  width="30"
+                  height="30"
+                  alt=""
+                />
+              </a>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Modal Edit -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Edit Data Mobil
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="">
+                  form-control
+                  <div class="mb-3">
+                    <input type="hidden" id="id" />
+                    <label for="name" class="form-label">Nama Mobil</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      aria-describedby="emailHelp"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label"
+                      >Deskripsi</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="description"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="price" class="form-label">Harga</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="price"
+                      aria-describedby="emailHelp"
+                      min="0"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <label for="status" class="form-label">Status</label>
+                      <select
+                        class="form-control"
+                        aria-label="Default select example"
+                        id="status"
+                      >
+                        <option selected>Tersedia</option>
+                        <option>Tidak Tersedia</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="image" class="form-label">Gambar</label>
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="image"
+                      accept="image/png, image/jpeg"
+                    />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="saveEditData()"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Tambah -->
+        <div
+          class="modal fade"
+          id="modalTambah"
+          tabindex="-1"
+          aria-labelledby="labelModalTambah"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="labelModalTambah">
+                  Tambah Data Mobil
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Nama Mobil</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nameTambah"
+                      aria-describedby="emailHelp"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label"
+                      >Deskripsi</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="descriptionTambah"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="price" class="form-label">Harga</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="priceTambah"
+                      aria-describedby="emailHelp"
+                      min="0"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <label for="status" class="form-label">Status</label>
+                      <select
+                        class="form-control"
+                        aria-label="Default select example"
+                        id="statusTambah"
+                      >
+                        <option selected>Tersedia</option>
+                        <option>Tidak Tersedia</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="image" class="form-label">Gambar</label>
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="imageTambah"
+                      accept="image/png, image/jpeg"
+                    />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="saveNewData()"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/jquery-3.6.1.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+
+    <script>
+      var db;
+
+      var request = indexedDB.open("imageDatabase", 1);
+
+      request.onupgradeneeded = (event) => {
+        db = event.target.result;
+        var objectStore = db.createObjectStore("images", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
+      };
+
+      request.onsuccess = (event) => {
+        db = event.target.result;
+      };
+
+      request.onerror = (event) => {};
+
+      function getImage(id) {
+        return new Promise(async (resolve, reject) => {
+          //await db open
+          while (!db) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+          }
+          var transaction = db.transaction("images", "readwrite");
+          var objectStore = transaction.objectStore("images");
+
+          let request = objectStore.get(id);
+
+          request.onsuccess = (event) => {
+            resolve(event.target.result);
+          };
+
+          request.onerror = (event) => {
+            reject(new Error("Error getting image from database"));
+          };
+        });
+      }
+
+      function uploadedFile(image) {
+        return new Promise((resolve, reject) => {
+          var transaction = db.transaction("images", "readwrite");
+          var objectStore = transaction.objectStore("images");
+          var reader = new FileReader();
+
+          reader.onload = function (event) {
+            var result = event.target.result;
+
+            // Open a new transaction inside the onload event
+            var newTransaction = db.transaction("images", "readwrite");
+            var newObjectStore = newTransaction.objectStore("images");
+
+            var request = newObjectStore.add({ image: result });
+
+            request.onsuccess = function (event) {
+              // alert("Gambar .");
+              resolve(event.target.result); // Resolve Promise dengan id
+            };
+
+            request.onerror = function (event) {
+              alert(
+                "Gagal Menyimpan data gambar ke database, silahkan coba lagi "
+              );
+              reject(new Error("Error adding image to the database"));
+            };
+          };
+
+          reader.readAsDataURL(image);
+        });
+      }
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+
+      function showData(ignoreAlert = false) {
+        let dataMobil = localStorage.getItem("dataMobil");
+        if (dataMobil == null && !ignoreAlert) {
+          alert("Data Mobil Kosong");
+          return;
+        }
+
+        dataMobil = JSON.parse(dataMobil);
+
+        let cardContent = "";
+
+        if (dataMobil.data.length == 0) {
+          document.getElementById("cardContent").innerHTML = cardContent;
+          alert("Data Mobil Kosong");
+          return;
+        }
+
+        dataMobil.data.forEach((mobil) => {
+          const status =
+            mobil.status == "Tersedia"
+              ? "style='color: green;'"
+              : "style='color: red;'";
+
+          //get image from indexedDB by id
+          if (Number.isInteger(mobil.image)) {
+            const image = getImage(mobil.image).then((image) => {
+              mobil.image = image.image;
+              cardContent += `
+                  <div class="card mb-3" style="max-width: 540px">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img
+                        src="${mobil.image}"
+                        class="img-fluid rounded-start"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">${mobil.name}</h5>
+                        <p class="card-text">
+
+                          ${mobil.description}<br/>
+
+                          Status: <a ${status}>${mobil.status}</a><br/>
+
+                          Harga: Rp. ${numberWithCommas(mobil.price)}/hari<br/>
+
+                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onclick="editData(${
+                            mobil.id
+                          })">Edit</button>
+                          <button type="button" class="btn btn-danger" onclick="deleteData(${
+                            mobil.id
+                          })">Delete</button>
+
+
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+
+              document.getElementById("cardContent").innerHTML = cardContent;
+            });
+
+            return;
+          }
+
+          mobil.image = image.image;
+
+          cardContent += `
+          <div class="card mb-3" style="max-width: 540px">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="${mobil.image}"
+                class="img-fluid rounded-start"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${mobil.name}</h5>
+                <p class="card-text">
+
+                  ${mobil.description}<br/>
+
+                  Status: <a ${status}>${mobil.status}</a><br/>
+
+                  Harga: Rp. ${numberWithCommas(mobil.price)}/hari<br/>
+
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onclick="editData(${
+                    mobil.id
+                  })">Edit</button>
+                  <button type="button" class="btn btn-danger" onclick="deleteData(${
+                    mobil.id
+                  })">Delete</button>
+
+
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+          `;
+
+          document.getElementById("cardContent").innerHTML = cardContent;
+        });
+      }
+
+      function editData(id) {
+        const dataMobil = localStorage.getItem("dataMobil");
+        const data = JSON.parse(dataMobil);
+        const mobil = data.data.find((mobil) => mobil.id == id);
+
+        document.getElementById("id").value = mobil.id;
+        document.getElementById("name").value = mobil.name;
+        document.getElementById("description").value = mobil.description;
+        document.getElementById("price").value = mobil.price;
+        const status = mobil.status == "Tersedia" ? 0 : 1;
+
+        document.getElementById("status").selectedIndex = status;
+      }
+
+      async function saveEditData() {
+        const id = document.getElementById("id").value;
+        const name = document.getElementById("name").value;
+        const description = document.getElementById("description").value;
+        const price = document.getElementById("price").value;
+        const status = document.getElementById("status").value;
+
+        //get data from uploaded file
+        const image = document.getElementById("image").files[0];
+        let imageId = null;
+        if (image) {
+          imageId = await uploadedFile(image);
+        }
+
+        //move image to folder images/cars
+
+        let data = localStorage.getItem("dataMobil");
+        data = JSON.parse(data);
+
+        let mobil = data.data;
+        let indexMobil = data.data.findIndex((mobil) => mobil.id == id);
+
+        mobil[indexMobil].name = name == "" ? mobil[indexMobil].name : name;
+        mobil[indexMobil].description = description;
+        mobil[indexMobil].price = price < 0 ? mobil[indexMobil].price : price;
+        mobil[indexMobil].status =
+          status == "" ? mobil[indexMobil].status : status;
+        mobil[indexMobil].image =
+          imageId == null ? mobil[indexMobil].image : imageId;
+
+        mobil = {
+          data: mobil,
+        };
+
+        const oldImage = data.data[indexMobil].image;
+
+        if (
+          oldImage != imageId &&
+          Number.isInteger(oldImage) &&
+          imageId != null
+        ) {
+          console.log("delete old image");
+          //delete old image from indexedDB
+          var transaction = db.transaction("images", "readwrite");
+          var objectStore = transaction.objectStore("images");
+
+          let request = objectStore.delete(oldImage);
+
+          request.onsuccess = (event) => {
+            console.log("Image deleted");
+          };
+
+          request.onerror = (event) => {
+            console.log("Error deleting image");
+          };
+        }
+
+        localStorage.setItem("dataMobil", JSON.stringify(mobil));
+
+        editData(id);
+        showData();
+
+        //cleare form
+        document.getElementById("image").value = "";
+
+        //close modal
+        $("#exampleModal").modal("hide");
+
+        alert("Data berhasil diubah");
+      }
+
+      function deleteData(id) {
+        const dataMobil = localStorage.getItem("dataMobil");
+        const data = JSON.parse(dataMobil);
+
+        const mobil = data.data.filter((mobil) => mobil.id != id);
+
+        localStorage.setItem("dataMobil", JSON.stringify({ data: mobil }));
+        console.log("Data berhasil dihapus");
+        showData(true);
+      }
+
+      async function saveNewData() {
+        const name = document.getElementById("nameTambah").value;
+        const description = document.getElementById("descriptionTambah").value;
+        const price = document.getElementById("priceTambah").value;
+        const status = document.getElementById("statusTambah").value;
+
+        //get data from uploaded file
+        const image = document.getElementById("imageTambah").files[0];
+        let imageId = null;
+        if (image) {
+          imageId = await uploadedFile(image);
+          console.log(imageId);
+        }
+
+        let data = await localStorage.getItem("dataMobil");
+        data = await JSON.parse(data);
+
+        if (data == null) {
+          data = {
+            data: [],
+          };
+        }
+        let mobil = data.data;
+        //id from epoch time
+        let id = new Date().getTime();
+
+        mobil.push({
+          id: id,
+          name: name,
+          description: description,
+          price: price,
+          status: status,
+          image: imageId,
+        });
+
+        mobil = {
+          data: mobil,
+        };
+
+        localStorage.setItem("dataMobil", JSON.stringify(mobil));
+
+        showData();
+
+        //cleare form
+        document.getElementById("nameTambah").value = "";
+        document.getElementById("descriptionTambah").value = "";
+        document.getElementById("priceTambah").value = "";
+        document.getElementById("statusTambah").value = "";
+        document.getElementById("imageTambah").value = "";
+
+        //close modal
+        $("#modalTambah").modal("hide");
+
+        alert("Data berhasil ditambahkan");
+      }
+
+      // function populateData() {
+      //   //make data to json to localstorage
+      //   const data = [
+      //     {
+      //       id: 1,
+      //       name: "xenia",
+      //       status: "Tersedia",
+      //       price: 100000,
+      //       image: 27,
+      //       description: "Mobil yang cocok digunakan dengan keluarga",
+      //       WaktuKembali: "2019-12-12 12:00:00",
+      //     },
+      //     {
+      //       id: 2,
+      //       name: "xenia 2",
+      //       status: "Tidak Tersedia",
+      //       price: 100000,
+      //       image: 24,
+      //       description: "Mobil yang cocok digunaka dengan keluarga",
+      //       WaktuKembali: "2019-12-12 12:00:00",
+      //     },
+      //     {
+      //       id: 3,
+      //       name: "xenia 3",
+      //       status: "Tersedia",
+      //       price: 100000,
+      //       image: 25,
+      //       description: "Mobil yang cocok digunaka dengan keluarga",
+      //       WaktuKembali: "2019-12-12 12:00:00",
+      //     },
+      //   ];
+
+      //   const dataMobil = {
+      //     data: data,
+      //   };
+
+      //   localStorage.setItem("dataMobil", JSON.stringify(dataMobil));
+      // }
+
+      // populateData();
+
+      showData();
+    </script>
+  </body>
+</html>

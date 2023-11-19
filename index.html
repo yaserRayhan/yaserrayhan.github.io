@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      /* body max width 100% */
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      /* splash screen */
+      #splash {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: #fff;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .splash-logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .splash-logo img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .splash-text {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .splash-text h2 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+    </style>
+    <title>Rental Mobil</title>
+  </head>
+  <body>
+    <!-- splash screen -->
+    <div id="splash">
+      <!-- Show Logo and text loading... -->
+      <div class="splash-logo">
+        <img src="favicon.png" alt="" />
+
+        <div class="splash-text">
+          <h2>Rental Mobil</h2>
+          <p>Loading...</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-4">
+
+          <div class="container mt-2">
+            <center>
+              <h1>Rental Mobil</h1>
+            </center>
+            <hr />
+          </div>
+
+          <div class="content pt-3">
+
+            <div class="row m-2">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Mobil</h5>
+                    <p class="card-text">
+                    <div id="totalMobil"></div></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-2">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Peminjam</h5>
+                    <p class="card-text">
+                    <div id="totalPeminjam"></div></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row m-2">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Pendapatan</h5>
+                    <p class="card-text"><div id="totalPendapatan"></div></p>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="botom-nav  pt-5">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
+              <div class="container">
+                <a class="navbar-brand" href="index.html">
+                  <img src="images/icon/house.svg" width="30" height="30" alt="" />
+                </a>
+                <a class="navbar-brand" href="peminjaman.html">
+                  <img src="images/icon/table.svg" width="30" height="30" alt="" />
+                </a>
+                <a class="navbar-brand" href="mobil.html">
+                  <img
+                    src="images/icon/car-front-fill.svg"
+                    width="30"
+                    height="30"
+                    alt=""
+                  />
+                </a>
+              </div>
+            </nav>
+          </div>
+
+          <!-- close col -->
+      </div>
+    </div>
+
+
+    <script src="assets/js/jquery-3.6.1.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+
+    <script>
+
+      // create splah screen when load page
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("splash").style.display = "none";
+
+          
+        }, 1000);
+      });
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+      async function showData() {
+       
+        let mobil = await localStorage.getItem("dataMobil");
+        mobil = JSON.parse(mobil);
+        let totalPeminjam = await localStorage.getItem("dataPeminjaman");
+        totalPeminjam = JSON.parse(totalPeminjam);
+        let totalPendapatan = 0;
+
+        //count total pendapatan
+        totalPeminjam?.forEach((element) => {
+          totalPendapatan += parseInt(element.totalBayar);
+        });
+
+        //display data
+        document.getElementById("totalMobil").innerHTML =
+          mobil?.data?.length || 0;
+        document.getElementById("totalPeminjam").innerHTML = totalPeminjam?.length || 0;
+        document.getElementById("totalPendapatan").innerHTML =
+          "Rp." + (numberWithCommas(totalPendapatan) || 0);
+      }
+
+      showData();
+    </script>
+    <script src="register.js"></script>
+    <script src="service-worker.js"></script>
+  </body>
+</html>
