@@ -20,270 +20,258 @@
     <title>Rental Mobil</title>
   </head>
   <body>
-    <div class="row justify-content-md-center w-100">
-     <center>
-      <div class="col-md-4">
-        <div class="container mt-2">
-            <h1>Rental Mobil</h1>
-            <hr />
-        </div>
-      </center>
+    <center>
+      <div class="row justify-content-md-center w-100">
+        <div class="col-md-4">
+          <div class="container mt-2">
+            <center>
+              <h1>Rental Mobil</h1>
+              <hr />
+            </center>
+          </div>
 
-        <div class="content pt-2">
-          <div class="container-fluid">
-            <button
-              class="btn btn-primary mb-3"
-              data-toggle="modal"
-              data-target="#modalTambah"
+          <div class="content pt-2">
+            <div class="container-fluid text-left">
+              <button
+                class="btn btn-primary mb-3"
+                data-toggle="modal"
+                data-target="#modalTambah"
+              >
+                Tambah Data
+              </button>
+
+              <div id="cardContent" class="mb-5"></div>
+            </div>
+          </div>
+
+          <div class="botom-nav pt-3">
+            <nav
+              class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom"
             >
-              Tambah Data
+              <div class="container">
+                <a class="navbar-brand" href="index.html">
+                  <img
+                    src="images/icon/house.svg"
+                    width="30"
+                    height="30"
+                    alt=""
+                  />
+                </a>
+                <a class="navbar-brand" href="peminjaman.html">
+                  <img
+                    src="images/icon/table.svg"
+                    width="30"
+                    height="30"
+                    alt=""
+                  />
+                </a>
+                <a class="navbar-brand" href="mobil.html">
+                  <img
+                    src="images/icon/car-front-fill.svg"
+                    width="30"
+                    height="30"
+                    alt=""
+                  />
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </center>
+
+    <!-- Modal Edit -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Data Mobil</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
             </button>
-
-            <div id="cardContent" class="mb-5"></div>
           </div>
-        </div>
-
-        <div class="botom-nav pt-3">
-          <nav
-            class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom"
-          >
-            <div class="container">
-              <a class="navbar-brand" href="index.html">
-                <img
-                  src="images/icon/house.svg"
-                  width="30"
-                  height="30"
-                  alt=""
+          <div class="modal-body">
+            <form action="">
+              <div class="mb-3">
+                <input type="hidden" id="id" />
+                <label for="name" class="form-label">Nama Mobil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  aria-describedby="emailHelp"
+                  required
                 />
-              </a>
-              <a class="navbar-brand" href="peminjaman.html">
-                <img
-                  src="images/icon/table.svg"
-                  width="30"
-                  height="30"
-                  alt=""
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <textarea
+                  class="form-control"
+                  id="description"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Harga</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  aria-describedby="emailHelp"
+                  min="0"
+                  required
                 />
-              </a>
-              <a class="navbar-brand" href="mobil.html">
-                <img
-                  src="images/icon/car-front-fill.svg"
-                  width="30"
-                  height="30"
-                  alt=""
+              </div>
+              <div class="mb-3">
+                <div class="form-group">
+                  <label for="status" class="form-label">Status</label>
+                  <select
+                    class="form-control"
+                    aria-label="Default select example"
+                    id="status"
+                  >
+                    <option selected>Tersedia</option>
+                    <option>Tidak Tersedia</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Gambar</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  id="image"
+                  accept="image/png, image/jpeg"
                 />
-              </a>
-            </div>
-          </nav>
-        </div>
-
-        <!-- Modal Edit -->
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-          >
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Edit Data Mobil
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
-              <div class="modal-body">
-                <form action="">
-                  form-control
-                  <div class="mb-3">
-                    <input type="hidden" id="id" />
-                    <label for="name" class="form-label">Nama Mobil</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      aria-describedby="emailHelp"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="description" class="form-label"
-                      >Deskripsi</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="description"
-                      rows="3"
-                    ></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="price" class="form-label">Harga</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="price"
-                      aria-describedby="emailHelp"
-                      min="0"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <div class="form-group">
-                      <label for="status" class="form-label">Status</label>
-                      <select
-                        class="form-control"
-                        aria-label="Default select example"
-                        id="status"
-                      >
-                        <option selected>Tersedia</option>
-                        <option>Tidak Tersedia</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="image" class="form-label">Gambar</label>
-                    <input
-                      class="form-control"
-                      type="file"
-                      id="image"
-                      accept="image/png, image/jpeg"
-                    />
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  onclick="saveEditData()"
-                >
-                  Save changes
-                </button>
-              </div>
-            </div>
+            </form>
           </div>
-        </div>
-
-        <!-- Modal Tambah -->
-        <div
-          class="modal fade"
-          id="modalTambah"
-          tabindex="-1"
-          aria-labelledby="labelModalTambah"
-          aria-hidden="true"
-        >
-          <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-          >
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="labelModalTambah">
-                  Tambah Data Mobil
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form action="">
-                  <div class="mb-3">
-                    <label for="name" class="form-label">Nama Mobil</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="nameTambah"
-                      aria-describedby="emailHelp"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="description" class="form-label"
-                      >Deskripsi</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="descriptionTambah"
-                      rows="3"
-                    ></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="price" class="form-label">Harga</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="priceTambah"
-                      aria-describedby="emailHelp"
-                      min="0"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <div class="form-group">
-                      <label for="status" class="form-label">Status</label>
-                      <select
-                        class="form-control"
-                        aria-label="Default select example"
-                        id="statusTambah"
-                      >
-                        <option selected>Tersedia</option>
-                        <option>Tidak Tersedia</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="image" class="form-label">Gambar</label>
-                    <input
-                      class="form-control"
-                      type="file"
-                      id="imageTambah"
-                      accept="image/png, image/jpeg"
-                    />
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  onclick="saveNewData()"
-                >
-                  Save changes
-                </button>
-              </div>
-            </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="saveEditData()"
+            >
+              Save changes
+            </button>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Modal Tambah -->
+    <div
+      class="modal fade"
+      id="modalTambah"
+      tabindex="-1"
+      aria-labelledby="labelModalTambah"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="labelModalTambah">Tambah Data Mobil</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+              <div class="mb-3">
+                <label for="name" class="form-label">Nama Mobil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nameTambah"
+                  aria-describedby="emailHelp"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <textarea
+                  class="form-control"
+                  id="descriptionTambah"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Harga</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="priceTambah"
+                  aria-describedby="emailHelp"
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <div class="form-group">
+                  <label for="status" class="form-label">Status</label>
+                  <select
+                    class="form-control"
+                    aria-label="Default select example"
+                    id="statusTambah"
+                  >
+                    <option selected>Tersedia</option>
+                    <option>Tidak Tersedia</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Gambar</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  id="imageTambah"
+                  accept="image/png, image/jpeg"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="saveNewData()"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="assets/js/jquery-3.6.1.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
 
@@ -401,8 +389,8 @@
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
-                        <h5 class="card-title">${mobil.name}</h5>
-                        <p class="card-text">
+                        <h5 class="card-title text-left">${mobil.name}</h5>
+                        <p class="card-text text-left">
 
                           ${mobil.description}<br/>
 
