@@ -185,6 +185,65 @@
           "Rp." + (numberWithCommas(totalPendapatan) || 0);
       }
 
+      function populateData() {
+        if (localStorage.getItem("dataMobil") == null) {
+          const data = [
+            {
+              id: 1,
+              name: "Toyota Avanza",
+              description: "Mobil keluarga",
+              price: 200000,
+              status: "Tersedia",
+              image: "images/cars/avanza.jpg",
+            },
+            {
+              id: 2,
+              name: "Toyota Innova",
+              description: "Mobil keluarga",
+              price: 300000,
+              status: "Tersedia",
+              image: "images/cars/innova.jpg",
+            },
+            {
+              id: 3,
+              name: "Toyota Fortuner",
+              description: "Mobil keluarga",
+              price: 400000,
+              status: "Tersedia",
+              image: "images/cars/fortuner.jpg",
+            },
+            {
+              id: 4,
+              name: "Toyota Alphard",
+              description: "Mobil keluarga",
+              price: 500000,
+              status: "Tersedia",
+              image: "images/cars/alphard.jpg",
+            },
+            {
+              id: 5,
+              name: "Toyota Camry",
+              description: "Mobil keluarga",
+              price: 600000,
+              status: "Tersedia",
+              image: "images/cars/camry.jpg",
+            },
+            {
+              id: 6,
+              name: "Xenia",
+              description: "Mobil keluarga",
+              price: 600000,
+              status: "Tersedia",
+              image: "images/cars/xenia.jpg",
+            },
+          ];
+
+          localStorage.setItem("dataMobil", JSON.stringify({ data: data }));
+        }
+      }
+
+      populateData();
+
       showData();
     </script>
     <script src="register.js"></script>
