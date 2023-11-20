@@ -1,14 +1,29 @@
 const CACHE_NAME = "SW-001";
 const toCache = [
   "/",
-  "/index.html",
-  "/manifest.json",
+  "index.html",
+  "manifest.json",
   "mobil.html",
   "peminjaman.html",
   "favicon.png",
   "assets/css/bootstrap.css",
+  "assets/css/bootstrap.css.map",
+  "navigation.css",
   "assets/js/bootstrap.js",
+  "assets/js/bootstrap.js.map",
   "assets/js/jquery-3.6.1.min.js",
+  "images/icon/car-front-fill.svg",
+  "images/icon/house.svg",
+  "images/icon/table.svg",
+  "register.js",
+  "service-worker.js",
+  "cars/alphard.jpg",
+  "cars/avanza.jpg",
+  "cars/camry.jpg",
+  "cars/fortuner.jpg",
+  "cars/innova.jpg",
+  "cars/xenia.jpeg",
+  "cars/xenia.jpg"
 ];
 showInstallPromotion();
 self.addEventListener("beforeinstallprompt", (e) => {
