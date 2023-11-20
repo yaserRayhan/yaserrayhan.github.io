@@ -502,6 +502,13 @@
 
         $("#modalTambahData").modal("hide");
 
+        document.getElementById("namaTambah").value ="";
+       document.getElementById("alamatTambah").value ="";
+        document.getElementById("nikTambah").value="";
+        document.getElementById("telpTambah").value="";
+        document.getElementById("inputMobil").value="";
+       document.getElementById("totalTambah").value="";
+
         let alert = `
         <div class="alert alert-success" role="alert">
           Data berhasil ditambahkan
@@ -512,6 +519,7 @@
         setTimeout(() => {
           document.getElementById("alertBerhasil").innerHTML = "";
         }, 3000);
+        
       }
 
       function detailData(id) {
