@@ -420,7 +420,8 @@
 
         for (let i = 0; i < data.length; i++) {
           //find data mobil
-
+          dataMobil = localStorage.getItem("dataMobil");
+        dataMobil = JSON.parse(dataMobil);
           dataMobil = dataMobil.data.find((item) => item.id == data[i].mobil);
 
           if (dataMobil == null) {
